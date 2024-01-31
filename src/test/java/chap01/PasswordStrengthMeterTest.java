@@ -70,4 +70,8 @@ public class PasswordStrengthMeterTest {
         asserStrength("123456", PasswordStrength.WEAK);
     }
 
+    @Test
+    void 대문자_포함_조건만_충족할_경우(){
+        asserStrength("QWERT", PasswordStrength.WEAK);
+    }
 }
