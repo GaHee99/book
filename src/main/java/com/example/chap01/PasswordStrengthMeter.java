@@ -3,14 +3,15 @@ package com.example.chap01;
 public class PasswordStrengthMeter {
 
     public PasswordStrength meter(String password) {
-        if(password.isBlank()) return PasswordStrength.INVALID;
-        if(password.length()<8) {
-            return PasswordStrength.NORMAL;
-        }
+        if(password==null || password.isBlank()) return PasswordStrength.INVALID;
+        boolean lengthEnough = password.length()>=8;
         boolean containsNum = meetsContainingNumber(password);
-        if(!containsNum) return PasswordStrength.NORMAL;
-
         boolean containsUpp = meetsContainingUpps(password);
+
+        if(lengthEnough && !containsNum && !containsUpp) return PasswordStrength.WEAK;
+
+        if(!lengthEnough) return PasswordStrength.NORMAL;
+        if(!containsNum) return PasswordStrength.NORMAL;
         if(!containsUpp) return PasswordStrength.NORMAL;
         return PasswordStrength.STRONG;
     }
