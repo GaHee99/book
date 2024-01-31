@@ -1,6 +1,9 @@
 package chap01;
 
+import com.example.chap01.PasswordStrength;
+import com.example.chap01.PasswordStrengthMeter;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * 1. 검사할 규칙
@@ -21,9 +24,9 @@ public class PasswordStrengthMeterTest {
     // 1. 첫번째 테스트 모든 규칙을 충족하는 경우
     @Test
     void 모든_규칙을_충족하는_경우() {
-        PasswordStrengthMEter meter = new PasswordStrengthMeter();
+        PasswordStrengthMeter meter = new PasswordStrengthMeter();
         PasswordStrength result = meter.meter("ab12!@AB");
-        assertEqual(PasswordStrength.STRONG, result);
+        assertEquals(PasswordStrength.STRONG, result);
     }
 
 }
