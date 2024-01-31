@@ -41,4 +41,9 @@ public class PasswordStrengthMeterTest {
         asserStrength("abcdACD!", PasswordStrength.NORMAL);
     }
 
+    @Test
+    void 값이_없는_경우() {
+        assertEquals(null, PasswordStrength.INVALID);
+    }
+
 }
