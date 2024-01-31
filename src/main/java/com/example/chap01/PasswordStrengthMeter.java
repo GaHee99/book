@@ -12,7 +12,7 @@ public class PasswordStrengthMeter {
         boolean containsUpp = meetsContainingUpps(password);
         if(containsUpp) metCount++;
 
-        if(metCount==1) return PasswordStrength.WEAK;
+        if(metCount<=1) return PasswordStrength.WEAK;
         if(metCount==2) return PasswordStrength.NORMAL;
         return PasswordStrength.STRONG;
     }
