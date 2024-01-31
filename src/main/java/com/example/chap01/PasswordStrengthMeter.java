@@ -4,17 +4,16 @@ public class PasswordStrengthMeter {
 
     public PasswordStrength meter(String password) {
         if(password==null || password.isBlank()) return PasswordStrength.INVALID;
+        int metCount = 0;
         boolean lengthEnough = password.length()>=8;
+        if(lengthEnough) metCount++;
         boolean containsNum = meetsContainingNumber(password);
+        if(containsNum) metCount++;
         boolean containsUpp = meetsContainingUpps(password);
+        if(containsUpp) metCount++;
 
-        if(lengthEnough && !containsNum && !containsUpp) return PasswordStrength.WEAK;
-        if(containsNum && !lengthEnough && !containsUpp) return PasswordStrength.WEAK;
-        if(containsUpp && !lengthEnough && !containsNum) return PasswordStrength.WEAK;
-
-        if(!lengthEnough) return PasswordStrength.NORMAL;
-        if(!containsNum) return PasswordStrength.NORMAL;
-        if(!containsUpp) return PasswordStrength.NORMAL;
+        if(metCount==1) return PasswordStrength.WEAK;
+        if(metCount==2) return PasswordStrength.NORMAL;
         return PasswordStrength.STRONG;
     }
     private boolean meetsContainingUpps(String s) {
