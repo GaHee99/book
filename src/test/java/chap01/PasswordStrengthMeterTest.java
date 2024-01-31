@@ -16,6 +16,11 @@ import static org.junit.jupiter.api.Assertions.*;
  *    한개 규칙 충족 = 약함
  */
 public class PasswordStrengthMeterTest {
+    PasswordStrengthMeter meter = new PasswordStrengthMeter();
+    private void asserStrength(String password, PasswordStrength exptStr) {
+        PasswordStrength result = meter.meter(password);
+        assertEquals(exptStr, result);
+    }
 
     @Test //테스트 환경 확인
     void name() {
@@ -23,26 +28,17 @@ public class PasswordStrengthMeterTest {
 
     @Test
     void 모든_규칙을_충족하는_경우() {
-        PasswordStrengthMeter meter = new PasswordStrengthMeter();
-        PasswordStrength result = meter.meter("ab12!@AB");
-        assertEquals(PasswordStrength.STRONG, result);
-
-        PasswordStrength result2 = meter.meter("ab123!@AB");
-        assertEquals(PasswordStrength.STRONG, result2);
+        asserStrength("ab123!@AB", PasswordStrength.STRONG);
     }
 
     @Test
     void 길이가_8글자_미만이고_다른_규칙은_모두_충족() {
-        PasswordStrengthMeter meter = new PasswordStrengthMeter();
-        PasswordStrength result = meter.meter("ab1!A");
-        assertEquals(PasswordStrength.NORMAL, result);
+        asserStrength("ab1!A", PasswordStrength.NORMAL);
     }
 
     @Test
     void 숫자는_포함하지_않고_다른_규칙은_모두_충족() {
-        PasswordStrengthMeter meter = new PasswordStrengthMeter();
-        PasswordStrength result = meter.meter("abcdACD!");
-        assertEquals(PasswordStrength.NORMAL, result);
+        asserStrength("abcdACD!", PasswordStrength.NORMAL);
     }
 
 }
