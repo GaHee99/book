@@ -21,7 +21,6 @@ public class PasswordStrengthMeterTest {
     void name() {
     }
 
-    // 1. 첫번째 테스트 모든 규칙을 충족하는 경우
     @Test
     void 모든_규칙을_충족하는_경우() {
         PasswordStrengthMeter meter = new PasswordStrengthMeter();
@@ -32,11 +31,17 @@ public class PasswordStrengthMeterTest {
         assertEquals(PasswordStrength.STRONG, result2);
     }
 
-    // 2. 길이만 8글자 미만일 때
     @Test
     void 길이가_8글자_미만이고_다른_규칙은_모두_충족() {
         PasswordStrengthMeter meter = new PasswordStrengthMeter();
         PasswordStrength result = meter.meter("ab1!A");
+        assertEquals(PasswordStrength.NORMAL, result);
+    }
+
+    @Test
+    void 숫자는_포함하지_않고_다른_규칙은_모두_충족() {
+        PasswordStrengthMeter meter = new PasswordStrengthMeter();
+        PasswordStrength result = meter.meter("abcdACD!");
         assertEquals(PasswordStrength.NORMAL, result);
     }
 
