@@ -43,7 +43,16 @@ public class PasswordStrengthMeterTest {
 
     @Test
     void 값이_없는_경우() {
-        assertEquals(null, PasswordStrength.INVALID);
+        asserStrength(null, PasswordStrength.INVALID);
     }
 
+    @Test
+    void 빈_문자열인_경우() {
+        asserStrength("", PasswordStrength.INVALID);
+    }
+
+    @Test
+    void 대문자를_포함하지_않고_나머지_조건을_충족하는_경우() {
+        asserStrength("123456a!", PasswordStrength.NORMAL);
+    }
 }
