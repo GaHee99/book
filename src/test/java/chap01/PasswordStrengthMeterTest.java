@@ -27,6 +27,16 @@ public class PasswordStrengthMeterTest {
         PasswordStrengthMeter meter = new PasswordStrengthMeter();
         PasswordStrength result = meter.meter("ab12!@AB");
         assertEquals(PasswordStrength.STRONG, result);
+
+        PasswordStrength result2 = meter.meter("ab123!@AB");
+        assertEquals(PasswordStrength.STRONG, result2);
     }
 
+    // 2. 길이만 8글자 미만일 때
+    @Test
+    void 길이가_8글자_미만이고_다른_규칙은_모두_충족() {
+        PasswordStrengthMeter meter = new PasswordStrengthMeter();
+        PasswordStrength result = meter.meter("ab1!A");
+        assertEquals(PasswordStrength.NORMAL, result);
+    }
 }
